@@ -34,3 +34,18 @@ def del_func(spisok_id):
         return jsonify({'error': 'Плохие данные'}), 404
     del spisok[spisok_id]
     return jsonify({'message': 'Данные удалены'}), 204
+
+@app.route('/update/<int:spisok_id>', methods=['PUT'])
+def update_func(spisok_id):
+    spisok_id -= 1
+    if spisok_id < 0 or spisok_id >= len(spisok):
+        return jsonify({'error': 'Плохие данные'}), 404
+
+    data = request.get_json()
+    spisok[spisok_id]['name'] = data.get('name', spisok[spisok_id]['name'])
+    spisok[spisok_id]['familia'] = data.get('familia', spisok[spisok_id]['familia'])
+    spisok[spisok_id]['country'] = data.get('country', spisok[spisok_id]['country'])
+    spisok[spisok_id]['city'] = data.get('city', spisok[spisok_id]['city'])
+    spisok[spisok_id]['date_start'] = data.get('date_start', spisok[spisok_id]['date_start'])
+    spisok[spisok_id]['date_end'] = data.get('date_end', spisok[spisok_id]['date_end'])
+    return jsonify(spisok[spisok_id]), 200
