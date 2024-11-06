@@ -49,3 +49,6 @@ def update_func(spisok_id):
     spisok[spisok_id]['date_start'] = data.get('date_start', spisok[spisok_id]['date_start'])
     spisok[spisok_id]['date_end'] = data.get('date_end', spisok[spisok_id]['date_end'])
     return jsonify(spisok[spisok_id]), 200
+
+if __name__ == '__main__':
+    app.run(debug=True)
